@@ -7,16 +7,18 @@ const resetButton = document.querySelector(".reset-button");
 // const test = () => console.log("working")
 // attackButton.addEventListener("click", test);
 
-//set up each type of ship as either a class or object
-//make sure the attack button randomly attacks each ship
-//create a reset button
-
 class spaceShip {
     constructor(name, healthPoints, pointsWhenHit, domSelector) {
         this.name = name;
         this.healthPoints = healthPoints;
         this.pointsWhenHit = pointsWhenHit;
         this.domSelector = domSelector;
+    }
+    isSpaceShipDead(){
+        if (this.healthPoints <= 0){
+            return true;
+        }
+        return false;
     }
     takeHP() {
         this.healthPoints -= this.pointsWhenHit;
@@ -26,8 +28,12 @@ class spaceShip {
     }
     deadSpaceship() {
         if (this.healthPoints <= 0){
-            this.domSelector.innerHTML = "Spaceship Down!"
-        }
+            this.domSelector.innerHTML = "Spaceship Down!";
+        } 
+    }
+    killAllShips(){
+        this.healthPoints = 0;
+        this.domSelector.innerHTML = "Spaceship Down!";    
     }
 }
 
@@ -46,7 +52,7 @@ class spaceShip {
     const attackShip7 = new spaceShip("Attack Ship", 45, 12, document.getElementById("attack-ship-7"))
     const attackShip8 = new spaceShip("Attack Ship", 45, 12, document.getElementById("attack-ship-8"))
 
-    const spaceShipsArr = [mothership,defenceShip1,defenceShip2,defenceShip3,defenceShip4,defenceShip5,attackShip1,attackShip2,attackShip3,attackShip4,attackShip5,attackShip6,attackShip7,attackShip8]
+    let spaceShipsArr = [mothership,defenceShip1,defenceShip2,defenceShip3,defenceShip4,defenceShip5,attackShip1,attackShip2,attackShip3,attackShip4,attackShip5,attackShip6,attackShip7,attackShip8]
 
 const attackSpaceShips = () => {
 
@@ -55,10 +61,20 @@ const attackSpaceShips = () => {
         console.log(spaceShipsArr[getRandomIndex]);
         return spaceShipsArr[getRandomIndex];
     }
-const getSpaceShip = chooseSpaceShip();
-getSpaceShip.takeHP();
-getSpaceShip.updateHTML();
-getSpaceShip.deadSpaceship();
+
+    let getSpaceShip = chooseSpaceShip();
+    while (getSpaceShip.isSpaceShipDead() === true){
+        getSpaceShip = chooseSpaceShip();
+        if (getSpaceShip.isSpaceShipDead() === false)
+        break;
+    }
+        getSpaceShip.takeHP();
+        getSpaceShip.updateHTML();
+        getSpaceShip.deadSpaceship();
+        
+    if (mothership.healthPoints <= 0){
+        spaceShipsArr.forEach(killAllShips());
+    }
 }
 
 attackButton.addEventListener("click", attackSpaceShips);

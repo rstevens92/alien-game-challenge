@@ -1,0 +1,2 @@
+import {attackSpaceShips} from './script'
+

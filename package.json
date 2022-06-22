@@ -1,0 +1,23 @@
+{
+  "name": "alien-game-challenge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rstevens92/alien-game-challenge.git"
+  },
+  "keywords": [],
+  "author": "Rachael Stevens",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rstevens92/alien-game-challenge/issues"
+  },
+  "homepage": "https://github.com/rstevens92/alien-game-challenge#readme",
+  "devDependencies": {
+    "jest": "^28.1.1"
+  }
+}

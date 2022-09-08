@@ -1,11 +1,5 @@
 const attackButton = document.querySelector(".attack-button");
 const resetButton = document.querySelector(".reset-button");
-// const motherShipHTMl = document.querySelector(".mothership");
-// const defenceShipHTML = document.querySelectorAll(".defence-ship");
-// const attackShipHTML = document.querySelectorAll(".attack-ship");
-
-// const test = () => console.log("working")
-// attackButton.addEventListener("click", test);
 
 class spaceShip {
     constructor(name, healthPoints, pointsWhenHit, domSelector) {
@@ -63,11 +57,13 @@ export const attackSpaceShips = () => {
     }
 
     let getSpaceShip = chooseSpaceShip();
+
     while (getSpaceShip.isSpaceShipDead() === true){
         getSpaceShip = chooseSpaceShip();
         if (getSpaceShip.isSpaceShipDead() === false)
         break;
     }
+
         getSpaceShip.takeHP();
         getSpaceShip.updateHTML();
         getSpaceShip.deadSpaceship();
